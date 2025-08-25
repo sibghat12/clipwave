@@ -1,0 +1,11 @@
+FROM php:8.3-apache
+WORKDIR /var/www/html
+
+RUN a2enmod rewrite \
+ && docker-php-ext-install pdo pdo_mysql
+
+COPY public/ /var/www/html/
+RUN mkdir -p /var/www/html/uploads
+
+EXPOSE 80
+CMD ["apache2-foreground"]
